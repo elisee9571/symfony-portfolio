@@ -1,0 +1,62 @@
+version: "3.9"
+
+volumes:
+    generated_files:
+    data_storage:
+
+services:
+    mysql:
+        image: mysql
+        container_name: portfolio_app_mysql
+        restart: always
+        volumes:
+            - data_storage:/var/lib/mysql
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+            - "3306:3306"
+
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: portfolio_app_pma
+        restart: always
+        depends_on:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+        ports:
+            - "8080:80"
+
+    php:
+        build: .docker/php
+        container_name: portfolio_app_php
+        restart: always
+        volumes:
+          - ./app:/var/www/app
+          - generated_files:/var/www/app/var/cache
+        depends_on:
+            - mysql
+        ports:
+            - '9000:9000'
+
+    nginx:
+        image: nginx
+        container_name: portfolio_app_nginx
+        volumes:
+          - ./app:/var/www/app
+          - .docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+          - ./logs/nginx:/var/log/nginx/
+        environment:
+            WORKDIR: /var/www/app
+        depends_on:
+          - php
+          - mysql
+        ports:
+          - '80:80'
+          - '443:443'
+        networks:
+            default:
+                aliases:
+                    - 'localhost'
+
+
