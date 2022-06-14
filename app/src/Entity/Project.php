@@ -6,6 +6,7 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -39,6 +40,7 @@ class Project
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->date = new \DateTime();
     }
 
     public function getId(): ?int

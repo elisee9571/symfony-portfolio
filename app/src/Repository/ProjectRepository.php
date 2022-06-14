@@ -39,6 +39,17 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+    public function findThree()
+   {
+       return $this->createQueryBuilder('p')
+           ->orderBy('p.name', 'DESC')
+           ->setMaxResults(3)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+
 //    /**
 //     * @return Project[] Returns an array of Project objects
 //     */

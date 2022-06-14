@@ -1,0 +1,18 @@
+{% for project in projects %}
+	<div class="card px-0 my-3">
+		<img src="{{ project.file }}" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">{{ project.name }}</h5>
+			<p class="card-text">{{ project.content }}</p>
+			{# {% for category in categories %}
+				<span class="badge alert-primary">
+					{{category.name}}
+				</span>
+			{% endfor %} #}
+			<p class="card-text">{{ project.user.name }}</p>
+			<p class="card-text">
+				<small class="text-muted">{{ project.date|date('d/m/Y') }}</small>
+			</p>
+		</div>
+	</div>
+{% endfor %}
