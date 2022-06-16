@@ -1,18 +1,16 @@
 {% for project in projects %}
-	<div class="card px-0 my-3">
-		<img src="{{ project.file }}" class="card-img-top" alt="...">
-		<div class="card-body">
-			<h5 class="card-title">{{ project.name }}</h5>
-			<p class="card-text">{{ project.content }}</p>
-			{# {% for category in categories %}
-				<span class="badge alert-primary">
-					{{category.name}}
-				</span>
-			{% endfor %} #}
-			<p class="card-text">{{ project.user.name }}</p>
-			<p class="card-text">
-				<small class="text-muted">{{ project.date|date('d/m/Y') }}</small>
-			</p>
+	<div class="col">
+		<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('{{ project.file }}');">
+			<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+				<h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ project.name }}</h2>
+				<ul class="d-flex list-unstyled mt-auto">
+					<li class="me-auto">
+						<span class="badge alert-primary">Réalisé le
+							{{ project.date|date('d/m/Y') }}</span>
+					</li>
+					<a href="{{ path('project_show', {'slug': project.slug}) }}" class="stretched-link"></a>
+				</ul>
+			</div>
 		</div>
 	</div>
 {% endfor %}

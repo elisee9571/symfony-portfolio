@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Project;
-use App\Repository\CategoryRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,29 +12,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProjectController extends AbstractController
 {
 
-    public function __construct(ProjectRepository $projectRepository, CategoryRepository $categoryRepository)
+    public function __construct(ProjectRepository $projectRepository)
     {
         $this->projectRepository = $projectRepository;
-        $this->categoryRepository = $categoryRepository;
     }
 
     #[Route(name: 'index')]
     public function index(): Response
     {
         $projects = $this->projectRepository->findAll();
-        // $categories = $projects->getCategory();
 
         return $this->render('project/index.html.twig', [
             'projects' => $projects,
-            // 'categories' => $categories,
         ]);
     }
 
     #[Route('/{slug}', name: 'show')]
     public function show(Project $project): Response
     {
-        return $this->render('project/index.html.twig', [
-            'projects' => $project,
+        $categories = $project->getCategory();
+
+        return $this->render('project/show/show.html.twig', [
+            'project' => $project,
+            'categories' => $categories
         ]);
     }
 }
