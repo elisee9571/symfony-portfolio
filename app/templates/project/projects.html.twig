@@ -1,8 +1,13 @@
 <div class="container">
-	<h2>Mes réalisations</h2>
-	<p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+	<h2>Mes réalisations ({{ projects.getTotalItemCount }})</h2>
+	<p class="text-muted">Voici mes réalisations, cliquez dessus pour en savoir plus...</p>
 
 	<div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
 		{% include "_partials/_card.html.twig" %}
 	</div>
+
+	<div class="pagination d-flex justify-content-center">
+		{{ knp_pagination_render(projects) }}
+	</div>
+
 </div>
