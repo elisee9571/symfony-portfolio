@@ -3,13 +3,13 @@
 	<header class="d-flex justify-content-center py-3">
 		<ul class="nav nav-pills">
 			<li class="nav-item">
-				<a href="{{ path('home_index') }}" {% if route_name == 'home_index' %} class="nav-link active" {% else %} class="nav-link" {% endif %}>Accueil</a>
+				<a href="{{ path('home_index') }}" class="nav-link {{ route_name == 'home_index' ? "active" : "" }}">Accueil</a>
 			</li>
 			<li class="nav-item">
-				<a href="{{ path('project_index') }}" {% if route_name == 'project_index' %} class="nav-link active" {% else %} class="nav-link" {% endif %}>Réalisations</a>
+				<a href="{{ path('project_index') }}" class="nav-link {{ route_name == 'project_index' or route_name == 'project_show' ? "active" : "" }}">Réalisations</a>
 			</li>
 			<li class="nav-item">
-				<a href="{{ path('about_index') }}" {% if route_name == 'about_index' %} class="nav-link active" {% else %} class="nav-link" {% endif %}>À Propos</a>
+				<a href="{{ path('about_index') }}" class="nav-link {{ route_name == 'about_index' ? "active" : "" }}">À Propos</a>
 			</li>
 		</ul>
 	</header>

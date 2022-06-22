@@ -3,27 +3,27 @@
 {% block title "Réalisations" %}
 
 {% block body %}
-	<div class="container pb-5">
+	<div class="container pb-5 mb-5">
 		<div class="row align-items-center">
-            <div class="p-3">
-            {% include "_partials/_btnBack.html" %}
-            </div>
+			<div class="py-5">
+				{% include "_partials/_btnBack.html" %}
+			</div>
 			<div class="col-md-6">
 				<img class="card-img-top mb-5 mb-md-0" src="{{project.file}}" alt="{{project.name}}">
 			</div>
 			<div class="col-md-6">
-				<div class="small mb-1">{{project.slug}}</div>
 				<h1 class="display-5 fw-bolder">{{project.name}}</h1>
-				<p class="lead">{{project.content|nl2br}}</p>
-				{% for category in categories %}
-					<p>
+				<div class="pb-3">
+					{% for category in categories %}
 						<span class="badge alert-primary">{{category.name}}</span>
-					</p>
-				{% endfor %}
-				<p>
-					<small class="text-muted">Réalisé le {{ project.date|date('d/m/Y') }}</small>
-				</p>
-                <a href="#" class="btn btn-primary">Visiter le site</a>
+					{% endfor %}
+				</div>
+				<p class="lead">{{project.content|nl2br}}</p>
+				<div class="d-flex justify-content-between align-items-center">
+					<a href="#" class="btn btn-primary">Visiter le site</a>
+					<small class="text-muted">Réalisé le
+						{{ project.date|date('d/m/Y') }}</small>
+				</div>
 			</div>
 		</div>
 	</div>
