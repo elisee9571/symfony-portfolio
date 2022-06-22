@@ -31,8 +31,7 @@ class ProjectFixtures extends Fixture
         $manager->persist($user);
 
         $category = new Category;
-        $category->setName("php")
-            ->setSlug($this->slugger->slug($category->getName())->lower());
+        $category->setName("php");
         $manager->persist($category);
 
         for ($i = 0; $i <= 10; $i++) {
@@ -41,6 +40,7 @@ class ProjectFixtures extends Fixture
                 ->setSlug($this->slugger->slug($projects->getName())->lower())
                 ->setContent($faker->sentence($nbWords = 6, $variableNbWords = true))
                 ->setFile($faker->imageUrl(640, 480))
+                ->setLink('https://google.com')
                 ->addCategory($category)
                 ->setUser($user);
             $manager->persist($projects);

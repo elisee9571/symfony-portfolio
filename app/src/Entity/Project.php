@@ -37,6 +37,9 @@ class Project
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'projects')]
     private $category;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $link;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -140,6 +143,18 @@ class Project
     public function removeCategory(Category $category): self
     {
         $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): self
+    {
+        $this->link = $link;
 
         return $this;
     }
