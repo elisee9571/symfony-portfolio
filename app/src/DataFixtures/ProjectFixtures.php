@@ -40,6 +40,8 @@ class ProjectFixtures extends Fixture
                 ->setSlug($this->slugger->slug($projects->getName())->lower())
                 ->setContent($faker->sentence($nbWords = 6, $variableNbWords = true))
                 ->setFile($faker->imageUrl(640, 480))
+                ->setIsVisible($faker->numberBetween(0, 1))
+                ->setDate($faker->dateTimeBetween($startDate = '-3 months', $endDate = 'now', $timezone = null))
                 ->setLink('https://google.com')
                 ->addCategory($category)
                 ->setUser($user);

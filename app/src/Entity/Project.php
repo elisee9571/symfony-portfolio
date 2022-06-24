@@ -7,8 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
+/**
+ * @Vich\Uploadable
+*/
 class Project
 {
     #[ORM\Id]
@@ -31,6 +36,12 @@ class Project
     #[ORM\Column(type: 'string', length: 255)]
     private $file;
 
+    /** 
+     * @Vich\UploadableField(mapping="realisation_image", fileNameProperty="file")
+     * @var File
+    */
+    private $imageFile;
+
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'projects')]
     private $user;
 
@@ -40,10 +51,16 @@ class Project
     #[ORM\Column(type: 'string', length: 255)]
     private $link;
 
+    #[ORM\Column(type: 'datetime')]
+    private $createdAt;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVisible;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
-        $this->date = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -111,6 +128,20 @@ class Project
         return $this;
     }
 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(File $file = null)
+    {
+        $this->imageFile = $file;
+
+        if($file){
+            $this->createdAt = new \Datetime('now');
+        }
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -155,6 +186,30 @@ class Project
     public function setLink(string $link): self
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(bool $isVisible): self
+    {
+        $this->isVisible = $isVisible;
 
         return $this;
     }
