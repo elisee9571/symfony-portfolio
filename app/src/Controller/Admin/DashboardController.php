@@ -27,7 +27,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Categorie', 'fas fa-tags', Category::class);
-        yield MenuItem::linkToCrud('Projet', 'fas fa-list', Project::class)->setDefaultSort(['date' => 'DESC']);
+        yield MenuItem::linkToCrud('Catégories', 'fas fa-tags', Category::class);
+        yield MenuItem::linkToCrud('Projets', 'fas fa-list', Project::class)->setDefaultSort(['date' => 'DESC']);
     }
 }
