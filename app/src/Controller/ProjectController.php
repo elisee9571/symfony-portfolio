@@ -23,7 +23,7 @@ class ProjectController extends AbstractController
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
         $projects = $paginator->paginate(
-            $this->projectRepository->findAll(),
+            $this->projectRepository->findBy(['isVisible' => true], ['createdAt' => 'DESC'], null, null),
             $request->query->getInt('page', 1),
             6
         );

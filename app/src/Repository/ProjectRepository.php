@@ -39,9 +39,10 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
-    public function findThree()
+    public function findProjectHome()
     {
         return $this->createQueryBuilder('p')
+            ->where('p.isVisible = true')
             ->orderBy('p.date', 'DESC')
             ->setMaxResults(3)
             ->getQuery()

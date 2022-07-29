@@ -1,6 +1,9 @@
 {% for project in projects %}
-	<div class="col">
-		<div class="card h-100 border-light" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('{{ project.file }}'); background-size: cover; background-position: center;">
+	<div class="col" style="height: 300px">
+		<div class="card h-100 border-light" style="
+						background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('/uploads/realisations/{{ project.file }}');
+						background-size: cover;
+						background-position: center;">
 			<div class="d-flex flex-column h-100 p-5 pb-3 text-white">
 				<h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" style="text-shadow: 0px 0px 10px black;">{{ project.name }}</h2>
 				<a href="{{ path('project_show', {'slug': project.slug}) }}" class="stretched-link"></a>

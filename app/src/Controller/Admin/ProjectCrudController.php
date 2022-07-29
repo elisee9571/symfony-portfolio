@@ -32,7 +32,7 @@ class ProjectCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('imageFile', 'Image')->setFormType(VichImageType::class)->hideOnIndex(),
+            ImageField::new('file', 'Image')->setUploadDir('/public/uploads/realisations/')->setUploadedFileNamePattern('[uuid].[extension]')->hideOnIndex(),
             ImageField::new('file', 'Image')->setBasePath('/uploads/realisations/')->onlyOnIndex(),
             TextField::new('name', 'Titre'),
             TextareaField::new('content', 'Description')->hideOnIndex(),
